@@ -48,7 +48,7 @@ const App = () => {
   };
 
   return (
-    <div className="p-4 bg-slate-50">
+    <div className="p-4">
       <h1 className="text-3xl font-bold mb-4 text-center ">
         <span className="animate-flash text-500 text-3xl">Poke</span>
         <span className="animate-flash text-red-500 text-3xl">dex</span>
@@ -64,15 +64,15 @@ const App = () => {
       />
 
       {/* Type Filters */}
-      <div className="flex gap-2 mb-4 justify-center">
+      <div className="flex-wrap gap-2 mb-4 justify-center">
         {["bug", "electric", "fire", "grass", "normal", "poison", "water"].map(
           (type) => (
             <button
               key={type}
               onClick={() => toggleTypeFilter(type)}
-              className={`border-x-4 hover:bg-gray-50 px-3 py-1 rounded ${
+              className={`border-2 px-3 py-1 rounded m-2  ${
                 selectedTypes.includes(type)
-                  ? "bg-blue-500 hover:bg-blue-400 text-white"
+                  ? "bg-blue-500 text-white"
                   : "bg-white"
               }`}
             >
@@ -131,10 +131,10 @@ const App = () => {
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             className="px-3 py-1 bg-gray-200 rounded"
           >
-            Previous
+            Prev.
           </button>
           <span className="mx-2">
-            Page {currentPage} of{" "}
+            P. {currentPage} of{" "}
             {Math.ceil(filteredPokemons.length / itemsPerPage)}
           </span>
           <button
@@ -156,9 +156,9 @@ const App = () => {
           onChange={(e) => setItemsPerPage(Number(e.target.value))}
           className="border border-gray-300 rounded p-1"
         >
-          <option value={10}>10 per page</option>
-          <option value={20}>20 per page</option>
-          <option value={50}>50 per page</option>
+          <option value={10}>10 pages</option>
+          <option value={20}>20 pages</option>
+          <option value={50}>50 pages</option>
         </select>
       </div>
     </div>
