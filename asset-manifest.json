@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Pokedex-Tailwindcss/static/css/main.acca9620.css",
+    "main.js": "/Pokedex-Tailwindcss/static/js/main.21dde316.js",
+    "index.html": "/Pokedex-Tailwindcss/index.html",
+    "main.acca9620.css.map": "/Pokedex-Tailwindcss/static/css/main.acca9620.css.map",
+    "main.21dde316.js.map": "/Pokedex-Tailwindcss/static/js/main.21dde316.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.acca9620.css",
+    "static/js/main.21dde316.js"
+  ]
+}
