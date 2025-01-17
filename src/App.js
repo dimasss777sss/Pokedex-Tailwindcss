@@ -83,7 +83,7 @@ const App = () => {
           placeholder="Search by name"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border border-gray-300 rounded p-2 w-1/3 text-center focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200"
+          className="border border-gray-300 rounded p-2 w-1/2 sm:w-1/3  text-center focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200"
           whileFocus={{
             scale: 1.05,
             boxShadow: "0px 4px 10px rgba(0, 0, 255, 0.3)",
@@ -93,7 +93,7 @@ const App = () => {
 
       {/* Filters */}
       <motion.div
-        className="flex gap-4 mb-4 justify-center"
+        className="flex flex-wrap gap-4 mb-4 justify-center"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, staggerChildren: 0.1 }}
@@ -103,7 +103,7 @@ const App = () => {
             <motion.button
               key={type}
               onClick={() => toggleTypeFilter(type)}
-              className={`border px-3 py-1 rounded font-semibold ${
+              className={`border px-3 py-1 text-sm sm:text-base rounded font-semibold hover:bg-blue-400 ${
                 selectedTypes.includes(type)
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200"
