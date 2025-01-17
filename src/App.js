@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
+
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
   const [search, setSearch] = useState("");
@@ -49,50 +51,102 @@ const App = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-3xl font-bold mb-4 text-center ">
-        <span className="animate-flash text-500 text-3xl">Poke</span>
-        <span className="animate-flash text-red-500 text-3xl">dex</span>
-      </h1>
-
-      {/* Search */}
-      <input
-        type="text"
-        placeholder="Search by name"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="border border-gray-300 rounded p-2 mb-4 w-full"
-      />
-
-      {/* Type Filters */}
-      <div className="flex-wrap gap-2 mb-4 justify-center">
-        {["bug", "electric", "fire", "grass", "normal", "poison", "water"].map(
-          (type) => (
-            <button
-              key={type}
-              onClick={() => toggleTypeFilter(type)}
-              className={`border-2 px-3 py-1 rounded m-2  ${
-                selectedTypes.includes(type)
-                  ? "bg-blue-500 text-white"
-                  : "bg-white"
-              }`}
-            >
-              {type}
-            </button>
-          )
-        )}
+      <div className="text-center mb-6">
+        <h1 className="text-3xl font-bold flex justify-center items-center">
+          <motion.span
+            className="text-blue-500"
+            initial={{ x: "-100%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 2 }}
+          >
+            Poke
+          </motion.span>
+          <motion.span
+            className="text-red-500"
+            initial={{ x: "100%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 2 }}
+          >
+            dex
+          </motion.span>
+        </h1>
       </div>
 
-      {/* Pokemon List */}
+      <motion.div
+        className="flex justify-center items-center mb-4"
+        initial={{ opacity: 0, scale: 0.3 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+      >
+        <motion.input
+          type="text"
+          placeholder="Search by name"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border border-gray-300 rounded p-2 w-1/3 text-center focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all duration-200"
+          whileFocus={{
+            scale: 1.05,
+            boxShadow: "0px 4px 10px rgba(0, 0, 255, 0.3)",
+          }}
+        />
+      </motion.div>
+
+      {/* Filters */}
+      <motion.div
+        className="flex gap-4 mb-4 justify-center"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, staggerChildren: 0.1 }}
+      >
+        {["bug", "electric", "fire", "grass", "normal", "poison", "water"].map(
+          (type, index) => (
+            <motion.button
+              key={type}
+              onClick={() => toggleTypeFilter(type)}
+              className={`border px-3 py-1 rounded font-semibold ${
+                selectedTypes.includes(type)
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200"
+              }`}
+              whileTap={{ scale: 0.9 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1,
+                type: "spring",
+                stiffness: 150,
+              }}
+            >
+              {type}
+            </motion.button>
+          )
+        )}
+      </motion.div>
+
+      {/* List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {paginatedPokemons.map((pokemon, index) => (
-          <div
+          <motion.div
             key={index}
             className="group relative border p-4 rounded-lg shadow-md hover:shadow-2xl transition-shadow duration-300"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <img
+            <motion.img
               src={pokemon.avatar}
               alt={pokemon.name}
-              className="w-24 h-24 mx-auto transform transition-transform duration-300 group-hover:translate-x-4 group-hover:scale-110"
+              className="w-24 h-24 mx-auto"
+              animate={{
+                filter: ["brightness(1)", "brightness(1.5)", "brightness(1)"],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                repeat: Infinity,
+                repeatType: "mirror",
+                duration: 1.5,
+              }}
             />
             <h2 className="text-xl font-bold">{pokemon.name}</h2>
             <div className="flex gap-2 my-2">
@@ -120,11 +174,11 @@ const App = () => {
                 </p>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
-      {/* Pagination */}
+      {/* Pagin. */}
       <div className="flex justify-between items-center mt-4">
         <div>
           <button
